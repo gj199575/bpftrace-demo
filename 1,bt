@@ -1,0 +1,7 @@
+tracepoint:syscalls:sys_enter_sched_setaffinity /comm == str($1)/
+{
+    printf("%d µs:   ", (nsecs - @start)/1000);
+    printf("%-6d %-9s %45s ", pid, comm, probe);
+
+    printf("[3] arg0:%d arg1:%d arg2:%p \n",  args->pid, args->len, args->user_mask_ptr);
+}
